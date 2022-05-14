@@ -1,0 +1,25 @@
+{
+  "name": "employee-tracker-cms-",
+  "version": "1.0.0",
+  "description": "This application will allow you to View, add, or edit your Employees, roles, and more.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niccatania/Employee-Tracker-CMS-.git"
+  },
+  "author": "Nic Catania",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Niccatania/Employee-Tracker-CMS-/issues"
+  },
+  "homepage": "https://github.com/Niccatania/Employee-Tracker-CMS-#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
+}

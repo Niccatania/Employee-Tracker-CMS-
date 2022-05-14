@@ -1,0 +1,25 @@
+DROP DATABASE IF EXISTS employee_DB;
+CREATE DATABASE employee_DB;
+
+USE employee_DB;
+
+CREATE TABLE department (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  dept_title VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE roles (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(100) NOT NULL,
+  salary DECIMAL,
+  department_id INT
+);
+
+CREATE TABLE employee (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR(100) NOT NULL,
+  salary DECIMAL,
+  role_id INT,
+  manager_id INT
+);
