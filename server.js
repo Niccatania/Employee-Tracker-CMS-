@@ -1,7 +1,9 @@
 const mysql = require('mysql2')
 const inquirer= require('inquirer');
 const cTable = require('console.table');
-
+const logo = require('asciiart-logo');
+const config = require('./package.json');
+console.log(logo(config).render());
 
 
 const connection= mysql.createConnection(
@@ -22,6 +24,8 @@ const connection= mysql.createConnection(
 
   function letsBegin(){
 
+                                                                                                                                             
+                                                                                                                                                                                                         
   inquirer
   .prompt(
     [{
@@ -83,38 +87,58 @@ const connection= mysql.createConnection(
 function addDept(){
   inquirer
   .prompt(
-    [{
+    [  {
       type:"input",
-      name:"addDept",
+      name:"id",
+     message: "Add an Id"
+    },
+      {
+      type:"input",
+      name:"dept_title",
      message: "Add a new department"
     }
-    ])}
-  }
+    ])
+    .then(function(answers){
+    connection.query(
+      "INSERT INTO department SET ?",
+      { id: answers.id,
+        dept_title: answers.dept_title,
+      },
+      function(err) {
+        if (err) throw err;
+        letsBegin();
+    });
 
-   
-function addRole(){
+                          })
+                        }
+                      }
+ function addRole(){
   inquirer
   .prompt([
     {
    
     type: "input",
-      name: "name",
+      name: "title",
       message: "Role name:",
     },
     {
       type: "input",
       name: "salary",
       message: "Role salary:",},
-      {
-     
-      type: "input",
-      name: "dept",
-      message: "Which department is the role in?",
-      },
-      // .then(function(answers){
-      //   let role=new Role(answers.Name, answers.salary, answers.dept, )});
       
-  ])}
+  ])
+  .then(function(answers){ 
+    connection.query(
+      "INSERT INTO roles SET ?",
+      { title: answers.title,
+        salary: answers.salary,
+      },
+        function(err) {
+        if (err) throw err;
+        letsBegin();
+    });
+
+                          })}
 
   function addEmployee(){
     inquirer
@@ -132,8 +156,8 @@ function addRole(){
         {
        
         type: "input",
-        name: "role",
-        message: "What is the employee's role?",
+        name: "salary",
+        message: "What is the employee's salary",
         },
         {
        
@@ -142,8 +166,65 @@ function addRole(){
           message: "Who is the employee's manager?",
           },
         
-    ])}
+    ])
+    .then(function(answers){ 
+      connection.query("INSERT INTO employee SET ?",
+        { first_name: answers.firstName,
+          last_name: answers.lastName,
+          salary:answers.salary
+        },
+          function(err) {
+          if (err) throw err;
+          letsBegin();
+      });
+  
+})}
 
-    // function updateEmployee();
+function updateEmployee(){
+  inquirer
+  .prompt([
+    {
+   
+    type: "input",
+      name: "firstName",
+      message: "Employee's first name",
+    },
+    {
+      type: "input",
+      name: "lastName",
+      message: "Employee's last name",},
+      {
+     
+      type: "input",
+      name: "salary",
+      message: "What is the employee's new salary",
+      },
+      {
+     
+        type: "input",
+        name: "manager",
+        message: "Who is the employee's manager?",
+        },
+      
+  ])
+  .then(function(answers){ 
+    connection.query("UPDATE INTO employee SET ?",
+      { first_name: answers.firstName,
+        last_name: answers.lastName,
+        salary:answers.salary
+      },
+        function(err) {
+        if (err) throw err;
+        letsBegin();
+    });
+
+                          })}
+
+
+    
+
+
+
+  
   
     
